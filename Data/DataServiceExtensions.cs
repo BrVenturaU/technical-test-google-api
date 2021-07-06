@@ -35,7 +35,7 @@ namespace Data
             });
 
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
-            builder.AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
+            builder.AddEntityFrameworkStores<DataContext>();
         }
     }
 }
