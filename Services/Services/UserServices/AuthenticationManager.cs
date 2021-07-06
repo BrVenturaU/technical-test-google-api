@@ -43,6 +43,12 @@ namespace Service.Services.UserServices
             return (_user != null && isCorrectPassword);
         }
 
+        public async Task<bool> ExistsUser(UserForRefreshSession userForRefreshSession)
+        {
+            _user = await _userManager.FindByIdAsync(userForRefreshSession.Id);
+            return _user != null;
+        }
+
         private SigningCredentials GetSigningCredentials()
         {
             var key = Encoding.UTF8.GetBytes(_configuration.GetSection("JwtSettings")["secret"]);

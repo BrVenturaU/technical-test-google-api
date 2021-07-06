@@ -11,5 +11,6 @@ namespace Contracts.Services.User
     {
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuthenticationDto);
         string CreateToken();
+        Task<bool> ExistsUser(UserForRefreshSession userForRefreshSession);
     }
 }

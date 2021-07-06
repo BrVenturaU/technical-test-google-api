@@ -2,6 +2,7 @@
 using Contracts.Services.User;
 using Data.DataTransferObjects.User;
 using Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -32,6 +33,17 @@ namespace TechnicalTestGoogleApi.Controllers
             var isValidUser = await _authenticationManager.ValidateUser(userForAuthentication);
             if (!isValidUser)
                 return NotFound("El usuario o la contraseña son incorrectos.");
+            return Ok(new { Token = _authenticationManager.CreateToken() });
+        }
+
+        [HttpGet("refresh"), Authorize]
+        public async Task<ActionResult> RefreshSessionToken()
+        {
+            var userId = HttpContext.User.Claims.Where(claim => claim.Type == "identifier").FirstOrDefault()?.Value;
+            var existsUser = await _authenticationManager.ExistsUser(new UserForRefreshSession { Id = userId });
+            if (!existsUser)
+                return Forbid("Acceso denegado.");
+
             return Ok(new { Token = _authenticationManager.CreateToken() });
         }
 
