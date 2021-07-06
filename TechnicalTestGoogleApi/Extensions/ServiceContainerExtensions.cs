@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TechnicalTestGoogleApi.Utils;
 
 namespace TechnicalTestGoogleApi.Extensions
 {
@@ -39,30 +40,21 @@ namespace TechnicalTestGoogleApi.Extensions
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
+                    Description = @"Encabezado de autorización bajo el esquema Bearer. <br/>
+                                    Coloque 'Bearer' [barra de espacio] y luego su token en la entrada de texto a continuación. <br/>
+                                    <b>Ejemplo:</b> 'Bearer eyJhbGciOiJIUzR5ceyJ1bmlxdWVfbm...'",
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    new string[]{}
-                    }
-                });
-
+                
+                c.OperationFilter<AuthOperationFilter>();
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+
             });
         }
         
