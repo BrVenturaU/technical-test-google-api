@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TechnicalTestGoogleApi.Controllers
+namespace TechnicalTestGoogleApi.Controllers.V1
 {
     [ApiController]
-    [Route("api/authentication")]
+    [Route("api/v1/authentication")]
     public class AuthenticationController: ControllerBase
     {
         private readonly UserManager<User> _userManager;

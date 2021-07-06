@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TechnicalTestGoogleApi.Extensions;
+using TechnicalTestGoogleApi.Utils;
 
 namespace TechnicalTestGoogleApi
 {
@@ -21,7 +22,9 @@ namespace TechnicalTestGoogleApi
         {
             services.AddAutoMapper(typeof(Startup));
             services.ConfigureAllServices(Configuration);
-            services.AddControllers();
+            services.AddControllers(options => {
+                options.Conventions.Add(new SwaggerVersionGroups());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
