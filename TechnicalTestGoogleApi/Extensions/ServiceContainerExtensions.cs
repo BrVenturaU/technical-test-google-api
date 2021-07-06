@@ -8,7 +8,9 @@ using Repository;
 using Service;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +34,7 @@ namespace TechnicalTestGoogleApi.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo { 
                     Title = "TechnicalTestGoogleApi",
                     Version = "v1",
+                    Description = "The TechnicalTest documentation for the API",
                     Contact = new OpenApiContact { Name = "Brandon Ventura", Email = "brandonventura16@gmail.com"}
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -56,6 +59,10 @@ namespace TechnicalTestGoogleApi.Extensions
                     new string[]{}
                     }
                 });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
         
