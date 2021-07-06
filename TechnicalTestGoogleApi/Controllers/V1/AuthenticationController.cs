@@ -8,12 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
-namespace TechnicalTestGoogleApi.Controllers
+namespace TechnicalTestGoogleApi.Controllers.V1
 {
     [ApiController]
-    [Route("api/authentication")]
+    [Route("api/v1/authentication")]
     public class AuthenticationController: ControllerBase
     {
         private readonly UserManager<User> _userManager;
@@ -27,16 +28,35 @@ namespace TechnicalTestGoogleApi.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Autentica un usuario con sus credenciales.
+        /// </summary>
+        /// <param name="userForAuthentication">Objeto con los datos del usuario para iniciar sesión</param>
+        /// <returns>El token de sesión del usuario.</returns>
+        /// <response code="200">Un token de sesión que permite al usuario estar autenticado.</response>
+        /// <response code="404">Si las credenciales del usuario son incorrectas.</response>
         [HttpPost("login")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
         {
             var isValidUser = await _authenticationManager.ValidateUser(userForAuthentication);
             if (!isValidUser)
-                return NotFound("El usuario o la contraseña son incorrectos.");
+                return NotFound("Sus credenciales de usuario son incorrectas.");
             return Ok(new { Token = _authenticationManager.CreateToken() });
         }
 
+        /// <summary>
+        /// Refresca la sesión generando un nuevo token de sesión.
+        /// </summary>
+        /// <returns>El nuevo token de sesión del usuario.</returns>
+        /// <response code="200">Un token de sesión que permite al usuario continuar autenticado.</response>
+        /// <response code="401">Sesión de usuario inactiva</response>
+        /// <response code="403">Si el usuario no existe y se deniega el acceso.</response>
         [HttpGet("refresh"), Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Forbidden)]
         public async Task<ActionResult> RefreshSessionToken()
         {
             var userId = HttpContext.User.Claims.Where(claim => claim.Type == "identifier").FirstOrDefault()?.Value;
@@ -47,7 +67,16 @@ namespace TechnicalTestGoogleApi.Controllers
             return Ok(new { Token = _authenticationManager.CreateToken() });
         }
 
+        /// <summary>
+        /// Crea un nuevo usuario.
+        /// </summary>
+        /// <param name="userForCreationDto">Objeto con los datos del usuario a ser creado</param>
+        /// <returns>Los datos del nuevo usuario.</returns>
+        /// <response code="200">El nuevo usuario creado.</response>
+        /// <response code="400">Si los datos de creación del usuario son incorrectos.</response>
         [HttpPost]
+        [ProducesResponseType(typeof(UserDto),(int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<UserDto>> RegisterUser([FromBody] UserForCreationDto userForCreationDto)
         {
             var user = _mapper.Map<User>(userForCreationDto);
