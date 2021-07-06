@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace TechnicalTestGoogleApi.Controllers.V1
@@ -24,7 +25,15 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             _logger = logger;
         }
 
+        /// <summary>
+        /// Obtiene una lista de estados del clima.
+        /// </summary>
+        /// <returns>Un listado de estados del clima.</returns>
+        /// <response code="200">Un listado de estados del clima.</response>
+        /// <response code="401">Sesión de usuario inactiva.</response>
         [HttpGet, Authorize]
+        [ProducesResponseType(typeof(IEnumerable<WeatherForecast>),(int) HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TechnicalTestGoogleApi</name>
+    </assembly>
+    <members>
+        <member name="M:TechnicalTestGoogleApi.Controllers.V1.AuthenticationController.Authenticate(Data.DataTransferObjects.User.UserForAuthenticationDto)">
+            <summary>
+            Autentica un usuario con sus credenciales.
+            </summary>
+            <param name="userForAuthentication">Objeto con los datos del usuario para iniciar sesión</param>
+            <returns>El token de sesión del usuario.</returns>
+            <response code="200">Un token de sesión que permite al usuario estar autenticado.</response>
+            <response code="404">Si las credenciales del usuario son incorrectas.</response>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Controllers.V1.AuthenticationController.RefreshSessionToken">
+            <summary>
+            Refresca la sesión generando un nuevo token de sesión.
+            </summary>
+            <returns>El nuevo token de sesión del usuario.</returns>
+            <response code="200">Un token de sesión que permite al usuario continuar autenticado.</response>
+            <response code="401">Sesión de usuario inactiva</response>
+            <response code="403">Si el usuario no existe y se deniega el acceso.</response>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Controllers.V1.AuthenticationController.RegisterUser(Data.DataTransferObjects.User.UserForCreationDto)">
+            <summary>
+            Crea un nuevo usuario.
+            </summary>
+            <param name="userForCreationDto">Objeto con los datos del usuario a ser creado</param>
+            <returns>Los datos del nuevo usuario.</returns>
+            <response code="200">El nuevo usuario creado.</response>
+            <response code="400">Si los datos de creación del usuario son incorrectos.</response>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Controllers.V1.WeatherForecastController.Get">
+            <summary>
+            Obtiene una lista de estados del clima.
+            </summary>
+            <returns>Un listado de estados del clima.</returns>
+            <response code="200">Un listado de estados del clima.</response>
+            <response code="401">Sesión de usuario inactiva.</response>
+        </member>
+    </members>
+</doc>

@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TechnicalTestGoogleApi.Extensions;
 using TechnicalTestGoogleApi.Utils;
 
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 namespace TechnicalTestGoogleApi
 {
     public class Startup
