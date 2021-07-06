@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Repository;
 using Service;
 using System;
@@ -17,10 +18,45 @@ namespace TechnicalTestGoogleApi.Extensions
     {
         public static void ConfigureAllServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.ConfigureSwagger();
             services.ConfigureDataServices(configuration);
             services.ConfigureRepositoryServices();
             services.ConfigureJWT(configuration);
             services.ConfigureProjectServices();
+        }
+
+        private static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { 
+                    Title = "TechnicalTestGoogleApi",
+                    Version = "v1",
+                    Contact = new OpenApiContact { Name = "Brandon Ventura", Email = "brandonventura16@gmail.com"}
+                });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[]{}
+                    }
+                });
+            });
         }
         
         private static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
