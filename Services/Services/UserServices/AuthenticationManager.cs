@@ -52,7 +52,7 @@ namespace Service.Services.UserServices
 
         private List<Claim> GetClaims()
         {
-            var claims = new List<Claim>() { new Claim(ClaimTypes.Name, _user.UserName), new Claim(ClaimTypes.NameIdentifier, _user.Id)};
+            var claims = new List<Claim>() { new Claim("name", _user.UserName), new Claim("identifier", _user.Id)};
             return claims;
 
         }
