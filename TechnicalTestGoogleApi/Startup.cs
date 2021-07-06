@@ -50,6 +50,7 @@ namespace TechnicalTestGoogleApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
