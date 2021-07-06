@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
+using Contracts.Services.User;
+using Data.DataTransferObjects.User;
 using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Service.DataTransferObjects.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,23 @@ namespace TechnicalTestGoogleApi.Controllers
     public class AuthenticationController: ControllerBase
     {
         private readonly UserManager<User> _userManager;
+        private readonly IAuthenticationManager _authenticationManager;
         private readonly IMapper _mapper;
 
-        public AuthenticationController(UserManager<User> userManager, IMapper mapper)
+        public AuthenticationController(UserManager<User> userManager, IAuthenticationManager authenticationManager, IMapper mapper)
         {
             _userManager = userManager;
+            _authenticationManager = authenticationManager;
             _mapper = mapper;
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
+        {
+            var isValidUser = await _authenticationManager.ValidateUser(userForAuthentication);
+            if (!isValidUser)
+                return NotFound("El usuario o la contraseña son incorrectos.");
+            return Ok(new { Token = _authenticationManager.CreateToken() });
         }
 
         [HttpPost]
@@ -37,5 +49,7 @@ namespace TechnicalTestGoogleApi.Controllers
             var userDto = _mapper.Map<UserDto>(user);
             return StatusCode(201, userDto);
         }
+
+
     }
 }

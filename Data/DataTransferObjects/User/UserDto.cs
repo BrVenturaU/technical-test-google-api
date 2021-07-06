@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.DataTransferObjects.User
+namespace Data.DataTransferObjects.User
 {
     public class UserDto
     {

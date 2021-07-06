@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace TechnicalTestGoogleApi.Extensions
             services.ConfigureDataServices(configuration);
             services.ConfigureRepositoryServices();
             services.ConfigureJWT(configuration);
+            services.ConfigureProjectServices();
         }
         
         private static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)

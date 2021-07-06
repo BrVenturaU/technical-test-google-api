@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Data.DataTransferObjects.User;
 using Data.Entities;
-using Service.DataTransferObjects.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
