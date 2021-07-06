@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechnicalTestGoogleApi.Extensions;
 
 namespace TechnicalTestGoogleApi
 {
@@ -27,6 +28,7 @@ namespace TechnicalTestGoogleApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.ConfigureAllServices(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
