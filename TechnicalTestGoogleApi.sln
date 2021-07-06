@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnicalTestGoogleApi", "TechnicalTestGoogleApi\TechnicalTestGoogleApi.csproj", "{64D82B6C-D81A-44BC-A2ED-2F19539F7153}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnicalTestGoogleApi", "TechnicalTestGoogleApi\TechnicalTestGoogleApi.csproj", "{64D82B6C-D81A-44BC-A2ED-2F19539F7153}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{C1593322-B5E0-4B37-AF03-A4CBC99D60B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{C1593322-B5E0-4B37-AF03-A4CBC99D60B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1A82157B-5638-4169-AAD7-6970978EB831}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{1A82157B-5638-4169-AAD7-6970978EB831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{3A536847-C2CE-4DF0-A9CF-6EF16A923D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{3A536847-C2CE-4DF0-A9CF-6EF16A923D40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{FEEF4802-7869-4B45-B9A3-0344A21B5480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Services\Service.csproj", "{FEEF4802-7869-4B45-B9A3-0344A21B5480}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
