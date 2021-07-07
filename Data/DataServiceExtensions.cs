@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Data.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,7 @@ namespace Data
             });
 
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
-            builder.AddEntityFrameworkStores<DataContext>();
+            builder.AddEntityFrameworkStores<DataContext>().AddErrorDescriber<CustomIdentityErrorDescriber>();
         }
     }
 }

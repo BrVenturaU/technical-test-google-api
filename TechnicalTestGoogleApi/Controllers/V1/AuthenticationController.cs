@@ -86,7 +86,11 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             var result = await _userManager.CreateAsync(user, userForCreationDto.Password);
             if (!result.Succeeded)
             {
-                result.Errors.ToList().ForEach(error => ModelState.TryAddModelError(error.Code, error.Description));
+                result.Errors.ToList().ForEach(error => {
+                    var contains = error.Code.Contains("Password");
+                    ModelState.TryAddModelError(error.Code, error.Description);
+                });
+                
                 return ApiResponse.BadRequest(ApiResponse.GetMessageList(ModelState));
             }
 
