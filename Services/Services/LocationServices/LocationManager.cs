@@ -17,6 +17,8 @@ namespace Service.Services.LocationServices
         {
             var httpClient = new HttpClient();
             var response = await httpClient.GetAsync($"https://ipinfo.io/{ip}");
+            if (!response.IsSuccessStatusCode)
+                return (null, OuterApiResponse.NotFoundResponse("La dirección IP no ha sido encontrada."));
             var body = await response.Content.ReadAsStringAsync();
             var locationDto = JsonConvert.DeserializeObject<LocationDto>(body);
             return (locationDto, OuterApiResponse.SuccessResponse("Ubicación conseguida."));
