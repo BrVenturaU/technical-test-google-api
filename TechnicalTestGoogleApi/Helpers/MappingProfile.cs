@@ -16,6 +16,7 @@ namespace Services.Helpers
         {
             CreateMap<UserForCreationDto, User>();
             CreateMap<User, UserDto>();
+            CreateMap<UserUpdateDto, User>();
         }
     }
 }
