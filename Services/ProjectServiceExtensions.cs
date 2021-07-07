@@ -1,5 +1,7 @@
-﻿using Contracts.Services.User;
+﻿using Contracts.Services.Location;
+using Contracts.Services.User;
 using Microsoft.Extensions.DependencyInjection;
+using Service.Services.LocationServices;
 using Service.Services.UserServices;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace Service
         public static void ConfigureProjectServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
+            services.AddScoped<ILocationManager, LocationManager>();
         }
     }
 }

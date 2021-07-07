@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Data.Utils;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Service.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -270,7 +270,7 @@ namespace TechnicalTestGoogleApi.Utils
             };
         }
 
-        public static implicit operator ApiResponse(OuterApiResponse response)
+        public static explicit operator ApiResponse(OuterApiResponse response)
         {
             var statusCode = HttpStatusCode.OK;
             switch (response.Status)
