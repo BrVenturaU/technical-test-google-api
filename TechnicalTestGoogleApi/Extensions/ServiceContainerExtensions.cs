@@ -15,6 +15,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TechnicalTestGoogleApi.Filters;
 using TechnicalTestGoogleApi.Utils;
 
 namespace TechnicalTestGoogleApi.Extensions
@@ -65,6 +66,7 @@ namespace TechnicalTestGoogleApi.Extensions
         {
             services.AddControllers(options => {
                 options.Conventions.Add(new SwaggerVersionGroups());
+                options.Filters.Add(typeof(ErrorsFilterAttribute));
             }).AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .ConfigureApiBehaviorOptions(options => {
                     options.InvalidModelStateResponseFactory = context => new BadRequestObjectResult( new ApiResponse((int)HttpStatusCode.BadRequest) {
