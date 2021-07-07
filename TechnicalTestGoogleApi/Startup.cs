@@ -25,6 +25,7 @@ namespace TechnicalTestGoogleApi
             // Converte todas las rutas en minusculas
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddAutoMapper(typeof(Startup));
+            // services.AddTransient<ErrorsFilterAttribute>();
             services.ConfigureAllServices(Configuration);
             
         }

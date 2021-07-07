@@ -10,12 +10,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using TechnicalTestGoogleApi.Filters;
 using TechnicalTestGoogleApi.Utils;
 
 namespace TechnicalTestGoogleApi.Controllers.V1
 {
     [ApiController]
     [Route("api/v1/authentication")]
+    //[ServiceFilter(typeof(ErrorsFilterAttribute))]
     public class AuthenticationController: ControllerBase
     {
         private readonly UserManager<User> _userManager;
