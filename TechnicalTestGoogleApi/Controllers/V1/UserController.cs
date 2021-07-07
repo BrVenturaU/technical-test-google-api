@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using TechnicalTestGoogleApi.Extensions;
 using TechnicalTestGoogleApi.Utils;
 
 namespace TechnicalTestGoogleApi.Controllers.V1
@@ -55,20 +56,14 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             if (existsUserName && !isActualUserName)
                 return ApiResponse.BadRequest("El nombre de usuario ya existe. Pruebe con otro nombre.");
             user = _mapper.Map(userUpdateDto, user);
+
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)
-            {
-                result.Errors.ToList().ForEach(error => ModelState.TryAddModelError(error.Code, error.Description));
+                return result.GetIdentityErrors().response;
 
-                return ApiResponse.BadRequest(ApiResponse.GetMessageList(ModelState));
-            }
             var passwordResult = await _userManager.ChangePasswordAsync(user, userUpdateDto.CurrentPassword, userUpdateDto.Password);
             if (!passwordResult.Succeeded)
-            {
-                passwordResult.Errors.ToList().ForEach(error => ModelState.TryAddModelError(error.Code, error.Description));
-
-                return ApiResponse.BadRequest(ApiResponse.GetMessageList(ModelState), "Usuario actualizado. Fallo al actualizar contraseña.");
-            }
+                return passwordResult.GetIdentityErrors().response;
             var userDto = _mapper.Map<UserDto>(user);
             return ApiResponse.Ok(userDto, "Usuario actualizado con éxito");
         }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using TechnicalTestGoogleApi.Extensions;
 using TechnicalTestGoogleApi.Filters;
 using TechnicalTestGoogleApi.Utils;
 
@@ -85,11 +86,7 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             var user = _mapper.Map<User>(userForCreationDto);
             var result = await _userManager.CreateAsync(user, userForCreationDto.Password);
             if (!result.Succeeded)
-            {
-                result.Errors.ToList().ForEach(error => ModelState.TryAddModelError(error.Code, error.Description));
-                
-                return ApiResponse.BadRequest(ApiResponse.GetMessageList(ModelState));
-            }
+                return result.GetIdentityErrors().response;
 
             var userDto = _mapper.Map<UserDto>(user);
             return ApiResponse.Created(userDto, "Usuario creado con exito.");
