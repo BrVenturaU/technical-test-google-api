@@ -10,6 +10,7 @@ namespace Contracts.Repositories.UserRepository
     public interface IUserRepository
     {
         Task<User> GetProfile(string id, bool trackChanges);
+        Task<(bool existsUserName, bool isActualUserName)> ExistsUserName(string id, string userName, bool trackChanges);
 
 
     }

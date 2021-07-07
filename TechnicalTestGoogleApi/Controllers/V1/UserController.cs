@@ -51,6 +51,9 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
                 return ApiResponse.NotFound("El perfil del usuario no ha sido encontrado.");
+            var (existsUserName, isActualUserName) = await _repositoryManager.User.ExistsUserName(userId, userUpdateDto.UserName, false);
+            if (existsUserName && !isActualUserName)
+                return ApiResponse.BadRequest("El nombre de usuario ya existe. Pruebe con otro nombre.");
             user = _mapper.Map(userUpdateDto, user);
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)

@@ -21,6 +21,11 @@ namespace Repository.Repositories.UserRepository
         public async Task<User> GetProfile(string id, bool trackChanges) =>
             await FindByCondition(u => u.Id == id, trackChanges).SingleOrDefaultAsync();
 
+        public async Task<(bool existsUserName, bool isActualUserName)> ExistsUserName(string id, string userName, bool trackChanges) {
+            var user = await FindByCondition(u => u.UserName == userName, trackChanges).FirstOrDefaultAsync();
+            return (user != null, user?.Id == id);
+        }
+
         public void UpdateUser(User user) => Update(user);
     }
 }
