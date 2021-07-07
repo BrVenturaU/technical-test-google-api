@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Services\Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Middlewares\NewFolder\" />
+  </ItemGroup>
+
 </Project>
