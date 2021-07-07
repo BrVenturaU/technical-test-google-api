@@ -22,6 +22,14 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             _locationManager = locationManager;
         }
 
+        /// <summary>
+        /// Obtiene datos de la ubicación del usuario a traves de la IP.
+        /// </summary>
+        /// <param name="ip">IP del dispositivo del usuario.</param>
+        /// <returns>Datos de la geolocalización del usuario.</returns>
+        /// <response code="200">La geolocalización del usuario.</response>
+        /// <response code="404">Si la IP no se encuentra disponible.</response>
+
         [HttpGet("{ip}")]
         public async Task<ActionResult> GetLocation(string ip)
         {

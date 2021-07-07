@@ -33,6 +33,13 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Busca el usuario mediante la sesión.
+        /// </summary>
+        /// <returns>Los datos del usuario en sesión.</returns>
+        /// <response code="200">El usuario actual en sesión.</response>
+        /// <response code="401">Sesión de usuario inactiva.</response>
+        /// <response code="404">Si el usuario no se ha encontrado.</response>
         [HttpGet("profile")]
         [ProducesResponseType(typeof(UserDto), (int) HttpStatusCode.OK)]
         public async Task<ActionResult<UserDto>> GetProfile()
@@ -45,6 +52,17 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             return ApiResponse.Ok(userDto, "Perfil del usuario.");
         }
 
+
+        /// <summary>
+        /// Actualiza los datos del perfil del usuario.
+        /// </summary>
+        /// <param name="userUpdateDto">Datos del usuario disponibles para ser actualizados</param>
+        /// <returns>El usuario actualizado.</returns>
+        /// <response code="200">El usuario con los nuevos datos.</response>
+        /// <response code="400-1">El nombre de usuario pertenece a otro usuario.</response>
+        /// <response code="400-2">Los datos de actualización del usuario contienen errores.</response>
+        /// <response code="401">Sesión de usuario inactiva.</response>
+        /// <response code="404">Si el usuario no se ha encontrado.</response>
         [HttpPut("profile")]
         public async Task<ActionResult<UserDto>> UpdateProfile([FromBody] UserUpdateDto userUpdateDto)
         {

@@ -31,6 +31,36 @@
             <response code="200">El nuevo usuario creado.</response>
             <response code="400">Si los datos de creación del usuario son incorrectos.</response>
         </member>
+        <member name="M:TechnicalTestGoogleApi.Controllers.V1.LocationController.GetLocation(System.String)">
+            <summary>
+            Obtiene datos de la ubicación del usuario a traves de la IP.
+            </summary>
+            <param name="ip">IP del dispositivo del usuario.</param>
+            <returns>Datos de la geolocalización del usuario.</returns>
+            <response code="200">La geolocalización del usuario.</response>
+            <response code="404">Si la IP no se encuentra disponible.</response>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Controllers.V1.UserController.GetProfile">
+            <summary>
+            Busca el usuario mediante la sesión.
+            </summary>
+            <returns>Los datos del usuario en sesión.</returns>
+            <response code="200">El usuario actual en sesión.</response>
+            <response code="401">Sesión de usuario inactiva.</response>
+            <response code="404">Si el usuario no se ha encontrado.</response>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Controllers.V1.UserController.UpdateProfile(Data.DataTransferObjects.User.UserUpdateDto)">
+            <summary>
+            Actualiza los datos del perfil del usuario.
+            </summary>
+            <param name="userUpdateDto">Datos del usuario disponibles para ser actualizados</param>
+            <returns>El usuario actualizado.</returns>
+            <response code="200">El usuario con los nuevos datos.</response>
+            <response code="400-1">El nombre de usuario pertenece a otro usuario.</response>
+            <response code="400-2">Los datos de actualización del usuario contienen errores.</response>
+            <response code="401">Sesión de usuario inactiva.</response>
+            <response code="404">Si el usuario no se ha encontrado.</response>
+        </member>
         <member name="M:TechnicalTestGoogleApi.Controllers.V1.WeatherForecastController.Get">
             <summary>
             Obtiene una lista de estados del clima.
