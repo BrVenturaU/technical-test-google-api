@@ -85,7 +85,7 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             if (!result.Succeeded)
             {
                 result.Errors.ToList().ForEach(error => ModelState.TryAddModelError(error.Code, error.Description));
-                return BadRequest(ModelState);
+                return ApiResponse.BadRequest(ApiResponse.GetMessageList(ModelState));
             }
 
             var userDto = _mapper.Map<UserDto>(user);
