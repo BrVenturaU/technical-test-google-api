@@ -1,4 +1,5 @@
 ﻿using Contracts.Services.Location;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace TechnicalTestGoogleApi.Controllers.V1
 {
     [ApiController]
     [Route("api/v1/location")]
+    [Authorize]
     public class LocationController : ControllerBase
     {
         private readonly ILocationManager _locationManager;
