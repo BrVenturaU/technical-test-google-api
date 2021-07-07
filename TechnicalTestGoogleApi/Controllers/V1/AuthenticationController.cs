@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using TechnicalTestGoogleApi.Utils;
 
 namespace TechnicalTestGoogleApi.Controllers.V1
 {
@@ -42,8 +43,8 @@ namespace TechnicalTestGoogleApi.Controllers.V1
         {
             var isValidUser = await _authenticationManager.ValidateUser(userForAuthentication);
             if (!isValidUser)
-                return NotFound("Sus credenciales de usuario son incorrectas.");
-            return Ok(new { Token = _authenticationManager.CreateToken() });
+                return ApiResponse.NotFound("Sus credenciales de usuario son incorrectas.");
+            return ApiResponse.Ok(new { Token = _authenticationManager.CreateToken() }, "Usuario autenticado correctamente.");
         }
 
         /// <summary>
@@ -62,9 +63,9 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             var userId = HttpContext.User.Claims.Where(claim => claim.Type == "identifier").FirstOrDefault()?.Value;
             var existsUser = await _authenticationManager.ExistsUser(new UserForRefreshSession { Id = userId });
             if (!existsUser)
-                return Forbid("Acceso denegado.");
+                return ApiResponse.Forbidden("Acceso denegado.");
 
-            return Ok(new { Token = _authenticationManager.CreateToken() });
+            return ApiResponse.Ok(new { Token = _authenticationManager.CreateToken() });
         }
 
         /// <summary>
@@ -84,11 +85,11 @@ namespace TechnicalTestGoogleApi.Controllers.V1
             if (!result.Succeeded)
             {
                 result.Errors.ToList().ForEach(error => ModelState.TryAddModelError(error.Code, error.Description));
-                return BadRequest(ModelState);
+                return ApiResponse.BadRequest(ApiResponse.GetMessageList(ModelState));
             }
 
             var userDto = _mapper.Map<UserDto>(user);
-            return StatusCode(201, userDto);
+            return ApiResponse.Created(userDto, "Usuario creado con exito.");
         }
 
 

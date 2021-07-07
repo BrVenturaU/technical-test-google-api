@@ -22,11 +22,11 @@ namespace TechnicalTestGoogleApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Converte todas las rutas en minusculas
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddAutoMapper(typeof(Startup));
             services.ConfigureAllServices(Configuration);
-            services.AddControllers(options => {
-                options.Conventions.Add(new SwaggerVersionGroups());
-            });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

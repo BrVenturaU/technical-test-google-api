@@ -1,5 +1,6 @@
 ﻿using Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,7 @@ namespace TechnicalTestGoogleApi.Extensions
             services.ConfigureRepositoryServices();
             services.ConfigureJWT(configuration);
             services.ConfigureProjectServices();
+            services.ConfigureExtraServices();
         }
 
         private static void ConfigureSwagger(this IServiceCollection services)
@@ -56,6 +59,19 @@ namespace TechnicalTestGoogleApi.Extensions
                 c.IncludeXmlComments(xmlPath);
 
             });
+        }
+
+        private static void ConfigureExtraServices(this IServiceCollection services)
+        {
+            services.AddControllers(options => {
+                options.Conventions.Add(new SwaggerVersionGroups());
+            }).AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .ConfigureApiBehaviorOptions(options => {
+                    options.InvalidModelStateResponseFactory = context => new BadRequestObjectResult( new ApiResponse((int)HttpStatusCode.BadRequest) {
+                        Message = "Se produjeron uno o más errores de validación",
+                        Data = ApiResponse.GetMessageList(context.ModelState)
+                    });
+                });
         }
         
         private static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
