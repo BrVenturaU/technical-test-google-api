@@ -45,7 +45,7 @@ namespace TechnicalTestGoogleApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("WebClientAll");
             app.UseAuthentication();
             app.UseAuthorization();
 

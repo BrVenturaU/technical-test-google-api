@@ -32,7 +32,7 @@ namespace TechnicalTestGoogleApi.Controllers.V1
         /// <returns>Un listado de estados del clima.</returns>
         /// <response code="200">Un listado de estados del clima.</response>
         /// <response code="401">Sesión de usuario inactiva.</response>
-        [HttpGet, Authorize]
+        [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<WeatherForecast>),(int) HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public ActionResult<IEnumerable<WeatherForecast>> Get()

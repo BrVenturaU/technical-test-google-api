@@ -30,6 +30,19 @@ namespace TechnicalTestGoogleApi.Extensions
             services.ConfigureJWT(configuration);
             services.ConfigureProjectServices();
             services.ConfigureExtraServices();
+            services.ConfigureCorsPolicies();
+        }
+
+        private static void ConfigureCorsPolicies(this IServiceCollection services)
+        {
+            services.AddCors(configuration =>
+            {
+                configuration.AddPolicy("WebClientAll", builder =>
+                    builder.SetIsOriginAllowed(_ => true)
+                    .AllowCredentials()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
         }
 
         private static void ConfigureSwagger(this IServiceCollection services)
