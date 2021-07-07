@@ -39,5 +39,86 @@
             <response code="200">Un listado de estados del clima.</response>
             <response code="401">Sesión de usuario inactiva.</response>
         </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Result(System.Int32,System.Object,System.String)">
+            <summary>
+            Devuelve un objeto ActionResult con contenido en formato Json
+            </summary>
+            <param name="statusCode"></param>
+            <param name="data"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Ok(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.OK"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Ok(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.OK"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Ok(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.OK"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Created(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Created"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Created(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Created"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Created(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Created"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Accepted(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Accepted"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Accepted(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Accepted"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Accepted(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Accepted"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.BadRequest(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.BadRequest"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.BadRequest(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.BadRequest"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.BadRequest(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.BadRequest"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Unauthorized(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Unauthorized"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Unauthorized(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Unauthorized"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Unauthorized(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Unauthorized"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Forbidden(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Forbidden"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Forbidden(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Forbidden"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Forbidden(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.Forbidden"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.NotFound(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.NotFound"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.NotFound(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.NotFound"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.NotFound(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.NotFound"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Error(System.Object,System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.InternalServerError"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Error(System.Object)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.InternalServerError"/>
+        </member>
+        <member name="M:TechnicalTestGoogleApi.Utils.ApiResponse.Error(System.String)">
+            <inheritdoc cref="F:System.Net.HttpStatusCode.InternalServerError"/>
+        </member>
     </members>
 </doc>
