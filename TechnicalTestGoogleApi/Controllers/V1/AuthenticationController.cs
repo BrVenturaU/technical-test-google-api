@@ -78,7 +78,7 @@ namespace TechnicalTestGoogleApi.Controllers.V1
         /// <returns>Los datos del nuevo usuario.</returns>
         /// <response code="200">El nuevo usuario creado.</response>
         /// <response code="400">Si los datos de creación del usuario son incorrectos.</response>
-        [HttpPost]
+        [HttpPost("register")]
         [ProducesResponseType(typeof(UserDto),(int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<UserDto>> RegisterUser([FromBody] UserForCreationDto userForCreationDto)

@@ -38,7 +38,7 @@ namespace TechnicalTestGoogleApi.Extensions
             services.AddCors(configuration =>
             {
                 configuration.AddPolicy("WebClientAll", builder =>
-                    builder.SetIsOriginAllowed(_ => true)
+                    builder.WithOrigins("https://technical-test-client.herokuapp.com", "http://localhost:8080")
                     .AllowCredentials()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
@@ -84,7 +84,7 @@ namespace TechnicalTestGoogleApi.Extensions
                 .ConfigureApiBehaviorOptions(options => {
                     options.InvalidModelStateResponseFactory = context => new BadRequestObjectResult( new ApiResponse((int)HttpStatusCode.BadRequest) {
                         Message = "Se produjeron uno o más errores de validación",
-                        Data = ApiResponse.GetMessageList(context.ModelState)
+                        Body = ApiResponse.GetMessageList(context.ModelState)
                     });
                 });
         }

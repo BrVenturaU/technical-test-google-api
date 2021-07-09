@@ -18,7 +18,7 @@ namespace TechnicalTestGoogleApi.Extensions
             {
                 result.Errors.ToList().ForEach(error => modelState.TryAddModelError(error.Code, error.Description));
 
-                return (ApiResponse.BadRequest(ApiResponse.GetMessageList(modelState)), !result.Succeeded);
+                return (ApiResponse.BadRequest(ApiResponse.GetMessageList(modelState), "Se produjeron uno o más errores de validación"), !result.Succeeded);
             }
             return (ApiResponse.Ok(), result.Succeeded);
         }
