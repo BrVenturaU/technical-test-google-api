@@ -21,7 +21,7 @@ namespace TechnicalTestGoogleApi.Utils
         public string Message { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public object Data { get; set; }
+        public object Body { get; set; }
 
         public ApiResponse(int statusCode = 200)
         {
@@ -36,7 +36,7 @@ namespace TechnicalTestGoogleApi.Utils
 
         public ApiResponse SetData(object data)
         {
-            Data = data;
+            Body = data;
             return this;
         }
 
@@ -100,7 +100,7 @@ namespace TechnicalTestGoogleApi.Utils
             var response = new ApiResponse(statusCode);
 
             if (data != null)
-                response.Data = data;
+                response.Body = data;
 
             if (message != null)
                 response.Message = message;
